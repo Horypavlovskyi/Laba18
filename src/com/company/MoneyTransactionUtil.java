@@ -79,10 +79,10 @@ public class MoneyTransactionUtil {
 
     public static void sendTo (Card cardNew1, Card cardNew2, double sum) throws RuntimeException {
         if (cardNew1.cardNumber == cardNew2.cardNumber) {
-            throw new RuntimeException("Ошибка: Номера карточек совпадают");
+            throw new AccountException ();
         }
         if (sum <= 0 || sum >= 100_000) {
-            throw new RuntimeException("Ошибка: Отрицательный баланс либо привышен лимит");
+            throw new MoneyValueExeption ();
         }
             cardNew1.cardSum = cardNew1.cardSum - sum;
             cardNew2.cardSum = cardNew2.cardSum + sum;
@@ -91,6 +91,14 @@ public class MoneyTransactionUtil {
     }
 
 
+    public static void sendTov2 (long cardNew1, long cardNew2, double sum) throws RuntimeException {
+        if (cardNew1 == cardNew2) {
+            throw new AccountException();
+        }
+        if (sum <= 0 || sum >= 100_000) {
+            throw new MoneyValueExeption();
+        }
+    }
 
     private MoneyTransactionUtil() {
     }
